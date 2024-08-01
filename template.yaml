@@ -160,45 +160,63 @@ Conditions:
 Mappings:
   RegionMap:
     'af-south-1':
-      AMI: 'ami-0cec12e29ebe3f0d5'
-    'eu-north-1':
-      AMI: 'ami-0653812935d0743fe'
-    'ap-south-1':
-      AMI: 'ami-0e306788ff2473ccb'
-    'eu-west-3':
-      AMI: 'ami-0de12f76efe134f2f'
-    'eu-west-2':
-      AMI: 'ami-0a669382ea0feb73a'
-    'eu-south-1':
-      AMI: 'ami-0759301b88845d121'
-    'eu-west-1':
-      AMI: 'ami-0bb3fad3c0286ebd5'
-    'ap-northeast-2':
-      AMI: 'ami-03b42693dc6a7dc35'
-    'me-south-1':
-      AMI: 'ami-08155c9ee8b845e35'
-    'ap-northeast-1':
-      AMI: 'ami-0ce107ae7af2e92b5'
-    'sa-east-1':
-      AMI: 'ami-02898a1921d38a50b'
-    'ca-central-1':
-      AMI: 'ami-0c2f25c1f66a1ff4d'
+      AMI: 'ami-0d31ee0f119f6a5ab'
     'ap-east-1':
-      AMI: 'ami-814d0ff0'
+      AMI: 'ami-0c06d80a037a63ae0'
+    'ap-northeast-1':
+      AMI: 'ami-0d03c6e00d5732e28'
+    'ap-northeast-2':
+      AMI: 'ami-045f2d6eeb07ce8c0'
+    'ap-northeast-3':
+      AMI: 'ami-06708ae97ebafbaa9'
+    'ap-south-1':
+      AMI: 'ami-068e0f1a600cd311c'
+    'ap-south-2':
+      AMI: 'ami-0c30a85b1c3556558'
     'ap-southeast-1':
-      AMI: 'ami-015a6758451df3cb9'
+      AMI: 'ami-012c2e8e24e2ae21d'
     'ap-southeast-2':
-      AMI: 'ami-0f96495a064477ffb'
+      AMI: 'ami-09f5ddaab17f5ff43'
+    'ap-southeast-3':
+      AMI: 'ami-0cf980aec0015b818'
+    'ap-southeast-4':
+      AMI: 'ami-04b3166fb29114139'
+    'ca-central-1':
+      AMI: 'ami-01cec95f547f7e19d'
+    'ca-west-1':
+      AMI: 'ami-07a0f881d3d6ab236'
     'eu-central-1':
-      AMI: 'ami-00a205cb8e06c3c4e'
+      AMI: 'ami-071878317c449ae48'
+    'eu-central-2':
+      AMI: 'ami-07ff91a199973aeb4'
+    'eu-north-1':
+      AMI: 'ami-0b8fd93c15b2c81ce'
+    'eu-south-1':
+      AMI: 'ami-066d08ad7fd45cc6a'
+    'eu-south-2':
+      AMI: 'ami-0fbe40add8e45c727'
+    'eu-west-1':
+      AMI: 'ami-05842291b9a0bd79f'
+    'eu-west-2':
+      AMI: 'ami-046d5130831576bbb'
+    'eu-west-3':
+      AMI: 'ami-0756283460878b818'
+    'il-central-1':
+      AMI: 'ami-05750b0b9aee2c149'
+    'me-central-1':
+      AMI: 'ami-0a5587632e4e3bef9'
+    'me-south-1':
+      AMI: 'ami-09a22431917032934'
+    'sa-east-1':
+      AMI: 'ami-02031d73889932104'
     'us-east-1':
-      AMI: 'ami-0947d2ba12ee1ff75'
+      AMI: 'ami-0427090fd1714168b'
     'us-east-2':
-      AMI: 'ami-03657b56516ab7912'
+      AMI: 'ami-00db8dadb36c9815e'
     'us-west-1':
-      AMI: 'ami-0e4035ae3f70c400f'
+      AMI: 'ami-03ed1381c73a5660e'
     'us-west-2':
-      AMI: 'ami-0528a5175983e7f28'
+      AMI: 'ami-074be47313f84fa38'
 Resources:
   FindingsTopic:
     Type: 'AWS::SNS::Topic'

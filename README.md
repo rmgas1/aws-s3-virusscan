@@ -1,5 +1,14 @@
 # Antivirus for Amazon S3
 
+## Update 2024-08-01
+
+Updating in this repository as the original repository was archived by the owner on Oct 3, 2023.
+
+* Update to use "Amazon Linux 2023 AMI 2023.5.20240722.0 x86_64 HVM kernel-6.1" (al2023-ami-2023.5.20240722.0-kernel-6.1-x86_64)
+* Add new Regions
+
+## Description
+
 This template creates a malware scanner cluster for S3 buckets. Connect as many S3 buckets as you like.
 
 > [bucketAV - Antivirus for Amazon S3](https://bucketav.com/) with additional features is available at [AWS Marketplace](https://aws.amazon.com/marketplace/pp/B07XFR781T).
