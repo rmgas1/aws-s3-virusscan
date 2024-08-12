@@ -1,8 +1,27 @@
 # Antivirus for Amazon S3
 
+## Update 2024-08-12
+
+* Update to use "Amazon Linux 2023 version 2023.5.20240805" a.k.a. al2023-ami-2023.5.20240805.0-kernel-6.1-x86_64 (ami-02346a771f34de8ac).
+* Add rsyslog to view journalctl -t s3-virusscan and other logs via CloudWatch.
+* Update s3-virusscan scripts to use ruby3.2
+* Update s3-virusscan gems to latest and removed workarounds for old gems.
+* Change s3-virusscan from SysV init script to systemd service file.
+* Update services to use systemd (sshd in ssh-access outstanding).
+* Add BounceServices to ensure relevant items are enabled, and running when the box comes up.
+
+### How to install
+
+1. Enable "Default Host Management Configuration" for the account, or as you see fit.
+2. Make sure you have "vpc-2azs", "vpc-3azs", or "vpc-4azs" stack setup.
+3. Create a new stack by uploading the template file from this repository.
+4. Set template variables as required for your use case.
+5. Update the security group to restrict ssh inbound access.
+6. Buy me a coffee :-)
+
 ## Update 2024-08-01
 
-Updating in this repository as the original repository was archived by the owner on Oct 3, 2023.
+Updating in this repository as the original was archived by the owner on Oct 3, 2023.
 
 * Update to use "Amazon Linux 2023 AMI 2023.5.20240722.0 x86_64 HVM kernel-6.1" (al2023-ami-2023.5.20240722.0-kernel-6.1-x86_64)
 * Add new Regions

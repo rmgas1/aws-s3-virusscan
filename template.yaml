@@ -1,5 +1,6 @@
 ---
 # Copyright 2018 widdix GmbH
+# Copyright 2024 Gate Consulting Pty Ltd
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,8 +13,11 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
+# Copied and adapted from Antivirus for Amazon S3 (https://github.com/widdix/aws-s3-virusscan)
+#
 AWSTemplateFormatVersion: '2010-09-09'
-Description: 'Security: Antivirus for Amazon S3, a cloudonaut.io template'
+Description: 'Security: Antivirus for Amazon S3 template'
 Metadata:
   'AWS::CloudFormation::Interface':
     ParameterGroups:
@@ -160,63 +164,63 @@ Conditions:
 Mappings:
   RegionMap:
     'af-south-1':
-      AMI: 'ami-0d31ee0f119f6a5ab'
+      AMI: 'ami-0e88380ff49065103'
     'ap-east-1':
-      AMI: 'ami-0c06d80a037a63ae0'
+      AMI: 'ami-0ccf0ea15a81a34c0'
     'ap-northeast-1':
-      AMI: 'ami-0d03c6e00d5732e28'
+      AMI: 'ami-0091f05e4b8ee6709'
     'ap-northeast-2':
-      AMI: 'ami-045f2d6eeb07ce8c0'
+      AMI: 'ami-0c2acfcb2ac4d02a0'
     'ap-northeast-3':
-      AMI: 'ami-06708ae97ebafbaa9'
+      AMI: 'ami-025d56c3db270616c'
     'ap-south-1':
-      AMI: 'ami-068e0f1a600cd311c'
+      AMI: 'ami-0a4408457f9a03be3'
     'ap-south-2':
-      AMI: 'ami-0c30a85b1c3556558'
+      AMI: 'ami-0e55e721512f34b3f'
     'ap-southeast-1':
-      AMI: 'ami-012c2e8e24e2ae21d'
+      AMI: 'ami-0a6b545f62129c495'
     'ap-southeast-2':
-      AMI: 'ami-09f5ddaab17f5ff43'
+      AMI: 'ami-02346a771f34de8ac'
     'ap-southeast-3':
-      AMI: 'ami-0cf980aec0015b818'
+      AMI: 'ami-056e3017ab35c7cc2'
     'ap-southeast-4':
-      AMI: 'ami-04b3166fb29114139'
+      AMI: 'ami-0790a5dc816e4a98f'
     'ca-central-1':
-      AMI: 'ami-01cec95f547f7e19d'
+      AMI: 'ami-0dcab815e6ee910aa'
     'ca-west-1':
-      AMI: 'ami-07a0f881d3d6ab236'
+      AMI: 'ami-052a5f65c131d4b63'
     'eu-central-1':
-      AMI: 'ami-071878317c449ae48'
+      AMI: 'ami-00060fac2f8c42d30'
     'eu-central-2':
-      AMI: 'ami-07ff91a199973aeb4'
+      AMI: 'ami-0f5486c334d83fb8c'
     'eu-north-1':
-      AMI: 'ami-0b8fd93c15b2c81ce'
+      AMI: 'ami-02af70169146bbdd3'
     'eu-south-1':
-      AMI: 'ami-066d08ad7fd45cc6a'
+      AMI: 'ami-0dd563d88411245af'
     'eu-south-2':
-      AMI: 'ami-0fbe40add8e45c727'
+      AMI: 'ami-02b019cb5a1d6ca83'
     'eu-west-1':
-      AMI: 'ami-05842291b9a0bd79f'
+      AMI: 'ami-0a2202cf4c36161a1'
     'eu-west-2':
-      AMI: 'ami-046d5130831576bbb'
+      AMI: 'ami-05ea2888c91c97ca7'
     'eu-west-3':
-      AMI: 'ami-0756283460878b818'
+      AMI: 'ami-015875403620174eb'
     'il-central-1':
-      AMI: 'ami-05750b0b9aee2c149'
+      AMI: 'ami-0472f52fca1703301'
     'me-central-1':
-      AMI: 'ami-0a5587632e4e3bef9'
+      AMI: 'ami-0aafc8599e4a5c6c3'
     'me-south-1':
-      AMI: 'ami-09a22431917032934'
+      AMI: 'ami-02eaf3b028ee9e816'
     'sa-east-1':
-      AMI: 'ami-02031d73889932104'
+      AMI: 'ami-09523541dfaa61c85'
     'us-east-1':
-      AMI: 'ami-0427090fd1714168b'
+      AMI: 'ami-0ae8f15ae66fe8cda'
     'us-east-2':
-      AMI: 'ami-00db8dadb36c9815e'
+      AMI: 'ami-05c3dc660cb6907f0'
     'us-west-1':
-      AMI: 'ami-03ed1381c73a5660e'
+      AMI: 'ami-0fda60cefceeaa4d3'
     'us-west-2':
-      AMI: 'ami-074be47313f84fa38'
+      AMI: 'ami-0a38c1c38a15fed74'
 Resources:
   FindingsTopic:
     Type: 'AWS::SNS::Topic'
@@ -344,9 +348,9 @@ Resources:
       PolicyType: StepScaling
       StepAdjustments:
       - MetricIntervalLowerBound: 0
-        MetricIntervalUpperBound: 25
+        MetricIntervalUpperBound: 50
         ScalingAdjustment: 1
-      - MetricIntervalLowerBound: 25
+      - MetricIntervalLowerBound: 50
         MetricIntervalUpperBound: 100
         ScalingAdjustment: 2
       - MetricIntervalLowerBound: 100
@@ -501,16 +505,37 @@ Resources:
     Metadata:
       'AWS::CloudFormation::Init':
         configSets:
-          default: [!If [HasSwapSize, swap, !Ref 'AWS::NoValue'], cloudwatch, !If [HasIAMUserSSHAccess, ssh-access, !Ref 'AWS::NoValue'], extras1, extras2, config]
+          default: [!If [HasSwapSize, swap, !Ref 'AWS::NoValue'], UpdateAndUpgradeYum, InstallPackages, InstallRubyGems, cloudwatch, !If [HasIAMUserSSHAccess, ssh-access, !Ref 'AWS::NoValue'], config, BounceServices]
         swap:
           commands:
             'a_setup':
               command: !Sub 'fallocate -l ${SwapSize}G /swapfile && chmod 600 /swapfile && mkswap /swapfile && swapon /swapfile && echo "/swapfile swap swap defaults 0 0" >> /etc/fstab'
               test: '[ ! -f /swapfile ]'
-        cloudwatch:
+        UpdateAndUpgradeYum:
+          commands:
+            'UU YAM': 
+              command: 'yum -y update && yum -y upgrade'
+        InstallPackages:
           packages:
-            rpm:
-              cloudwatch: 'https://s3.amazonaws.com/amazoncloudwatch-agent/amazon_linux/amd64/latest/amazon-cloudwatch-agent.rpm'
+            yum:
+              'amazon-cloudwatch-agent': []
+              'clamd': []
+              'clamav': []
+              'clamav-update': []
+              'gcc': []
+              'rsyslog': []
+              'ruby3.2': []
+              'ruby3.2-devel': []
+        InstallRubyGems:
+          packages:
+            rubygems:
+              'aws-sdk-s3': []
+              'aws-sdk-sns': []
+              'aws-sdk-sqs': []
+              'daemons': []
+              'nokogiri': []
+              'rubysl-securerandom': []
+        cloudwatch:
           files:
             '/opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json': # https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Agent-Configuration-File-Details.html
               content: !Sub |
@@ -644,7 +669,7 @@ Resources:
               owner: root
               group: root
           services:
-            sysvinit:
+            systemd:
               'amazon-cloudwatch-agent':
                 enabled: true
                 ensureRunning: true
@@ -652,6 +677,9 @@ Resources:
                 - '/opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json'
                 packages:
                 - cloudwatch
+              'rsyslog':  
+                enabled: true
+                ensureRunning: true
         ssh-access:
           files:
             '/opt/authorized_keys_command.sh':
@@ -718,25 +746,7 @@ Resources:
                 commands:
                 - 'a_configure_sshd_command'
                 - 'b_configure_sshd_commanduser'
-        extras1:
-          commands:
-            a_enable_epel:
-              command: 'amazon-linux-extras enable epel=7.11 && yum -y clean metadata'
-              test: "! grep -Fxq '[amzn2extra-epel]' /etc/yum.repos.d/amzn2-extras.repo"
-        extras2:
-          packages:
-            yum:
-              'epel-release': []
-              ruby: []
         config:
-          packages:
-            yum:
-              clamd: []
-              clamav: []
-              'clamav-update': []
-            rubygems:
-              daemons: ['1.3.1']
-              'rubysl-securerandom': ['2.0.0']
           files:
             '/opt/aws-s3-virusscan/daemon.rb':
               content: |
@@ -946,32 +956,23 @@ Resources:
               mode: '000644'
               owner: root
               group: root
-            '/etc/init.d/s3-virusscan':
+            '/etc/systemd/system/s3-virusscan.service':
               content: |
-                #!/usr/bin/env ruby
-                # chkconfig:    - 80 20
-                APP_NAME = 's3-virusscan'
-                APP_PATH = '/opt/aws-s3-virusscan/daemon.rb'
-                case ARGV.first
-                  when 'start'
-                    puts "Starting #{APP_NAME}..."
-                    system(APP_PATH, 'start')
-                    exit($?.exitstatus)
-                  when 'stop'
-                    system(APP_PATH, 'stop')
-                    exit($?.exitstatus)
-                  when 'restart'
-                    system(APP_PATH, 'restart')
-                    exit($?.exitstatus)
-                  when 'status'
-                    system(APP_PATH, 'status')
-                    exit($?.exitstatus)
-                end
-                unless %w{start stop restart status}.include? ARGV.first
-                  puts "Usage: #{APP_NAME} {start|stop|restart|status}"
-                  exit(1)
-                end
-              mode: '000755'
+                [Unit]
+                Description=Amazon S3 Virus Scan Service
+                After=clamd@scan.service
+
+                [Service]
+                ExecStart=/opt/aws-s3-virusscan/daemon.rb start
+                ExecReload=/opt/aws-s3-virusscan/daemon.rb restart
+                ExecStop=/opt/aws-s3-virusscan/daemon.rb stop
+                Type=forking
+                PIDFile=s3-virusscan.pid
+                Restart=on-failure
+
+                [Install]
+                WantedBy=clamd@scan.service
+              mode: '000644'
               owner: root
               group: root
             '/etc/cfn/cfn-hup.conf':
@@ -991,60 +992,29 @@ Resources:
                 action=/opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource ScanLaunchTemplate --region ${AWS::Region}
                 runas=root
           commands:
-            a_enable_freshclam_cron:
-              command: 'sed -i "s/^FRESHCLAM_DELAY/#FRESHCLAM_DELAY/g" /etc/sysconfig/freshclam'
-            b_enable_freshclam:
-              command: 'sed -i "s/^Example/#Example/g" /etc/freshclam.conf'
-            c_prepare_local_sopcket:
-              command: 'mkdir /var/run/clamd.scan && chown clamscan:clamscan /var/run/clamd.scan'
+            a_configure_freshclam_conf:
+              command: 'sed -i "s/^Example/#Example/g;s/^#UpdateLogFile/UpdateLogFile/g" /etc/freshclam.conf'
+            b_enable_freshclam_daemon:
+              command: '/usr/bin/freshclam -d'
+            c_prepare_local_socket:
+              command: 'mkdir /var/run/clamd.scan && chown clamscan:virusgroup /var/run/clamd.scan'
               test: '[ ! -d /var/run/clamd.scan ]'
-            d_enable_clamd_scan:
-              command: 'sed -i "s/^Example/#Example/g;s/^#LocalSocket /LocalSocket /g" /etc/clamd.d/scan.conf'
+            d_configure_clamd_conf:
+              command: 'sed -i "s/^Example/#Example/g;s/^#LocalSocket /LocalSocket \/var/g" /etc/clamd.d/scan.conf'
             e_add_clamdscan_config:
               command: 'ln -s /etc/clamd.d/scan.conf /etc/clamd.conf'
               test: '[ ! -f /etc/clamd.conf ]'
-            f_update_clamav_db:
-              command: freshclam
-            g_systemctl_enable_clamd:
+            f_systemctl_enable_clamd:
               command: 'systemctl enable clamd@scan'
               test: '! systemctl is-enabled clamd@scan'
-            h_systemctl_start_clamd:
-              command: 'systemctl start clamd@scan'
-              test: '! systemctl is-active clamd@scan'
-            i_gem_install_aws_eventstream: # workaround for https://github.com/aws/aws-sdk-ruby/pull/2573#issuecomment-913984611
-              command: 'gem install aws-eventstream -v 1.1.1'
-              test: '! gem list aws-eventstream -i -v 1.1.1'
-            j_gem_install_aws_partitions: # workaround for https://github.com/aws/aws-sdk-ruby/pull/2573#issuecomment-913984611
-              command: 'gem install aws-partitions -v 1.493.0'
-              test: '! gem list aws-partitions -i -v 1.493.0'
-            k_gem_install_aws_sigv4: # workaround for https://github.com/aws/aws-sdk-ruby/pull/2573#issuecomment-913984611
-              command: 'gem install aws-sigv4 -v 1.2.4'
-              test: '! gem list aws-sigv4 -i -v 1.2.4'
-            l_gem_install_aws_sdk_core: # workaround for https://github.com/aws/aws-sdk-ruby/pull/2573#issuecomment-913984611
-              command: 'gem install aws-sdk-core -v 3.119.1'
-              test: '! gem list aws-sdk-core -i -v 3.119.1'
-            m_gem_install_aws_sdk_sqs: # workaround for https://github.com/aws/aws-sdk-ruby/pull/2573#issuecomment-913984611
-              command: 'gem install aws-sdk-sqs -v 1.23.1 --ignore-dependencies'
-              test: '! gem list aws-sdk-sqs -i -v 1.23.1'
-            n_gem_install_aws_sdk_sns: # workaround for https://github.com/aws/aws-sdk-ruby/pull/2573#issuecomment-913984611
-              command: 'gem install aws-sdk-sns -v 1.20.0 --ignore-dependencies'
-              test: '! gem list aws-sdk-sns -i -v 1.20.0'
-            o_gem_install_aws_sdk_kms: # workaround for https://github.com/aws/aws-sdk-ruby/pull/2573#issuecomment-913984611
-              command: 'gem install aws-sdk-kms -v 1.26.0 --ignore-dependencies'
-              test: '! gem list aws-sdk-kms -i -v 1.26.0'
-            p_gem_install_aws_sdk_s3: # workaround for https://github.com/aws/aws-sdk-ruby/pull/2573#issuecomment-913984611
-              command: 'gem install aws-sdk-s3 -v 1.54.0 --ignore-dependencies'
-              test: '! gem list aws-sdk-s3 -i -v 1.54.0'
+            g_systemctl_enable_s3_virusscan:
+              command: 'systemctl enable s3-virusscan'
+              test: '! systemctl is-enabled s3-virusscan'
+            h_systemctl_enable_rsyslog:
+              command: 'systemctl enable rsyslog'
+              test: '! systemctl is-enabled rsyslog' 
           services:
-            sysvinit:
-              's3-virusscan':
-                enabled: true
-                ensureRunning: true
-                files:
-                - '/opt/aws-s3-virusscan/daemon.rb'
-                - '/opt/aws-s3-virusscan/worker.rb'
-                - '/opt/aws-s3-virusscan/s3-virusscan.conf'
-                - '/etc/init.d/s3-virusscan'
+            systemd:
               amazon-ssm-agent:
                 enabled: !If [HasSystemsManagerAccess, true, false]
                 ensureRunning: !If [HasSystemsManagerAccess, true, false]
@@ -1054,6 +1024,34 @@ Resources:
                 files:
                 - '/etc/cfn/cfn-hup.conf'
                 - '/etc/cfn/hooks.d/cfn-auto-reloader.conf'
+              's3-virusscan':
+                enabled: true
+                ensureRunning: true
+                files:
+                - '/opt/aws-s3-virusscan/daemon.rb'
+                - '/opt/aws-s3-virusscan/worker.rb'
+                - '/opt/aws-s3-virusscan/s3-virusscan.conf'
+                - '/etc/systemd/system/s3-virusscan.service'
+        BounceServices:
+          commands:
+            a_systemctl_stop_s3-virusscan:
+              command: 'systemctl stop s3-virusscan'
+              test: 'systemctl is-active s3-virusscan'
+            b_systemctl_stop_clamd:
+              command: 'systemctl stop clamd@scan'
+              test: 'systemctl is-active clamd@scan'
+            c_systemctl_stop_rsyslog:
+              command: 'systemctl stop rsyslog'
+              test: 'systemctl is-active rsyslog' 
+            d_systemctl_start_rsyslog:
+              command: 'systemctl start rsyslog'
+              test: '! systemctl is-active rsyslog' 
+            e_systemctl_start_clamd:
+              command: 'sleep 20 && systemctl start clamd@scan'
+              test: '! systemctl is-active clamd@scan'
+            f_systemctl_start_s3-virusscan:
+              command: 'systemctl start s3-virusscan'
+              test: '! systemctl is-active s3-virusscan'
     Properties:
       LaunchTemplateData:
         KeyName: !If [HasKeyName, !Ref KeyName, !Ref 'AWS::NoValue']
