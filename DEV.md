@@ -4,7 +4,7 @@
 To update the region map execute the following lines in your terminal:
 
 ```
-for region in $(aws ec2 describe-regions --query "Regions[].RegionName" --output text); do ami=$(aws --region $region ec2 describe-images --filters "Name=name,Values=al2023-ami-2023.5.20240722.0-kernel-6.1-x86_64" --query "Images[0].ImageId" --output "text"); printf "'$region':\n  AMI: '$ami'\n"; done
+for region in $(aws ec2 describe-regions --query "Regions[].RegionName" --output text); do ami=$(aws --region $region ec2 describe-images --filters "Name=name,Values=al2023-ami-2023.6.20250303.0-kernel-6.1-x86_64" --query "Images[0].ImageId" --output "text"); printf "'$region':\n  AMI: '$ami'\n"; done
 ```
 
 ## Manually Update ClamAV db

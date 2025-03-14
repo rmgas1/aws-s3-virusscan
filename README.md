@@ -1,5 +1,9 @@
 # Antivirus for Amazon S3
 
+## Update 2025-03-14
+
+* Update to use "Amazon Linux 2023 version 2023.6.20250303" a.k.a. al2023-ami-2023.6.20250303.0-kernel-6.1-x86_64 (ami-0013d898808600c4a).
+
 ## Update 2024-08-12
 
 * Update to use "Amazon Linux 2023 version 2023.5.20240805" a.k.a. al2023-ami-2023.5.20240805.0-kernel-6.1-x86_64 (ami-02346a771f34de8ac).

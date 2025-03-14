@@ -1,6 +1,6 @@
 ---
 # Copyright 2018 widdix GmbH
-# Copyright 2024 Gate Consulting Pty Ltd
+# Copyright 2024-2025 Gate Consulting Pty Ltd
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -164,63 +164,63 @@ Conditions:
 Mappings:
   RegionMap:
     'af-south-1':
-      AMI: 'ami-0e88380ff49065103'
+      AMI: 'ami-00d6d5db7a745ff3f'
     'ap-east-1':
-      AMI: 'ami-0ccf0ea15a81a34c0'
+      AMI: 'ami-0d5eef4adba4fd173'
     'ap-northeast-1':
-      AMI: 'ami-0091f05e4b8ee6709'
+      AMI: 'ami-0599b6e53ca798bb2'
     'ap-northeast-2':
-      AMI: 'ami-0c2acfcb2ac4d02a0'
+      AMI: 'ami-062cddb9d94dcf95d'
     'ap-northeast-3':
-      AMI: 'ami-025d56c3db270616c'
+      AMI: 'ami-0fd09938053af7270'
     'ap-south-1':
-      AMI: 'ami-0a4408457f9a03be3'
+      AMI: 'ami-05c179eced2eb9b5b'
     'ap-south-2':
-      AMI: 'ami-0e55e721512f34b3f'
+      AMI: 'ami-0ae47cb7b24e2d8ed'
     'ap-southeast-1':
-      AMI: 'ami-0a6b545f62129c495'
+      AMI: 'ami-0b5a4445ada4a59b1'
     'ap-southeast-2':
-      AMI: 'ami-02346a771f34de8ac'
+      AMI: 'ami-0013d898808600c4a'
     'ap-southeast-3':
-      AMI: 'ami-056e3017ab35c7cc2'
+      AMI: 'ami-0a379f7fc8bb4b0e2'
     'ap-southeast-4':
-      AMI: 'ami-0790a5dc816e4a98f'
+      AMI: 'ami-096afcc6296200057'
     'ca-central-1':
-      AMI: 'ami-0dcab815e6ee910aa'
+      AMI: 'ami-0cc3a9edb87c91b53'
     'ca-west-1':
-      AMI: 'ami-052a5f65c131d4b63'
+      AMI: 'ami-04a831f1811ac437f'
     'eu-central-1':
-      AMI: 'ami-00060fac2f8c42d30'
+      AMI: 'ami-0b74f796d330ab49c'
     'eu-central-2':
-      AMI: 'ami-0f5486c334d83fb8c'
+      AMI: 'ami-05d5afb7144092398'
     'eu-north-1':
-      AMI: 'ami-02af70169146bbdd3'
+      AMI: 'ami-0c2e61fdcb5495691'
     'eu-south-1':
-      AMI: 'ami-0dd563d88411245af'
+      AMI: 'ami-077e2fabf29e9a90b'
     'eu-south-2':
-      AMI: 'ami-02b019cb5a1d6ca83'
+      AMI: 'ami-0faf7e1ebef03dcaa'
     'eu-west-1':
-      AMI: 'ami-0a2202cf4c36161a1'
+      AMI: 'ami-08f9a9c699d2ab3f9'
     'eu-west-2':
-      AMI: 'ami-05ea2888c91c97ca7'
+      AMI: 'ami-0e56583ebfdfc098f'
     'eu-west-3':
-      AMI: 'ami-015875403620174eb'
+      AMI: 'ami-0eaf62527f5bb8940'
     'il-central-1':
-      AMI: 'ami-0472f52fca1703301'
+      AMI: 'ami-01615eae09a67a472'
     'me-central-1':
-      AMI: 'ami-0aafc8599e4a5c6c3'
+      AMI: 'ami-0be4b5fe14f158c5a'
     'me-south-1':
-      AMI: 'ami-02eaf3b028ee9e816'
+      AMI: 'ami-0f29bb40035eb2a58'
     'sa-east-1':
-      AMI: 'ami-09523541dfaa61c85'
+      AMI: 'ami-09bc0685970d93c8d'
     'us-east-1':
-      AMI: 'ami-0ae8f15ae66fe8cda'
+      AMI: 'ami-08b5b3a93ed654d19'
     'us-east-2':
-      AMI: 'ami-05c3dc660cb6907f0'
+      AMI: 'ami-0d0f28110d16ee7d6'
     'us-west-1':
-      AMI: 'ami-0fda60cefceeaa4d3'
+      AMI: 'ami-01eb4eefd88522422'
     'us-west-2':
-      AMI: 'ami-0a38c1c38a15fed74'
+      AMI: 'ami-0b6d6dacf350ebc82'
 Resources:
   FindingsTopic:
     Type: 'AWS::SNS::Topic'
